@@ -22,13 +22,13 @@ def compute_avg_loss(root_dir, output_csv):
             # Extract task name, e.g., dev_gqa_conversations_60 → gqa
             task_name = subdir.replace("dev_", "").replace("_conversations_60", "")
             rows.append((task_name, avg_loss))
-            print(f"[✔] {task_name}: average loss = {avg_loss:.4f}")
+            print(f"{task_name}: average loss = {avg_loss:.4f}")
         except Exception as e:
-            print(f"[✘] Failed to read {loss_path}: {e}")
+            print(f"Failed to read {loss_path}: {e}")
 
     df_out = pd.DataFrame(rows, columns=["task_name", "avg_loss"])
     df_out.to_csv(output_csv, index=False)
-    print(f"[💾] Saved to: {output_csv}")
+    print(f"Saved to: {output_csv}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Compute average loss for each task")
