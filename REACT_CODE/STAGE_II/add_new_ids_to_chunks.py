@@ -45,9 +45,9 @@ def add_new_ids_to_chunks(input_dir, output_dir):
         with open(output_path, 'w') as f_out:
             json.dump(data, f_out, indent=2)
 
-        print(f"[✔] {fname} processed, {len(data)} records written → {output_path}")
+        print(f"{fname} processed, {len(data)} records written → {output_path}")
 
-    print(f"[✅] All done. Total new_ids generated: {global_index - 1}")
+    print(f"All done. Total new_ids generated: {global_index - 1}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Add unique 'new_id' field to chunk_*.json files")
