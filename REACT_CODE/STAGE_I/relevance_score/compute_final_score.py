@@ -53,7 +53,7 @@ def compute_and_save_scores(similarity_dir, weight_path, output_dir, save_txt=Fa
             with open(score_txt_path, "w") as f:
                 for val in weighted_score.cpu().numpy():
                     f.write(f"{val[0]:.8f}\n")
-            print(f"[📝] Saved TXT: {score_txt_path}")
+            print(f"Saved TXT: {score_txt_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
