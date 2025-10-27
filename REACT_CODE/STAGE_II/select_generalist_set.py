@@ -32,11 +32,11 @@ def select_generalist_samples(weight_csv, subset_ratio, intersection_csv, task_r
     inter_ids = set(inter_df["new_id"])
     inter_count = len(inter_ids)
 
-    print(f"[✓] Total samples: {total_samples}, Subset ratio: {subset_ratio}, Required intersection samples: {inter_count}")
+    print(f"Total samples: {total_samples}, Subset ratio: {subset_ratio}, Required intersection samples: {inter_count}")
 
     target_total = round(total_samples * subset_ratio)
     remaining_quota = target_total - inter_count
-    print(f"[✓] Final generalist target size: {target_total}, Remaining quota: {remaining_quota}")
+    print(f"Final generalist target size: {target_total}, Remaining quota: {remaining_quota}")
 
     # 4. Precise quota allocation: float quota + residual compensation
     quota_info = []
@@ -80,7 +80,7 @@ def select_generalist_samples(weight_csv, subset_ratio, intersection_csv, task_r
     task_remaining = task_quota.copy()  # Remaining quota
 
     # Multi-round allocation
-    print(f"[🔁] Starting multi-round allocation...")
+    print(f"Starting multi-round allocation...")
     round_count = 0
     while sum(task_remaining.values()) > 0:
         round_count += 1
@@ -103,17 +103,17 @@ def select_generalist_samples(weight_csv, subset_ratio, intersection_csv, task_r
                 for t in task_pools:
                     task_pools[t] = task_pools[t][task_pools[t]["new_id"] != nid].reset_index(drop=True)
                 break  # Move to next task
-        print(f"[🔄] Round {round_count} completed. Remaining quota: {sum(task_remaining.values())}")
+        print(f"Round {round_count} completed. Remaining quota: {sum(task_remaining.values())}")
 
     # 6. Merge final generalist set
     inter_final = inter_df[["new_id", "score", "source_task"]]
     selected_rows = [pd.DataFrame(rows) for rows in task_selected_rows.values()]
     final_df = pd.concat([inter_final] + selected_rows, ignore_index=True)
-    print(f"[✅] Final generalist set size: {len(final_df)} / Target size: {target_total}")
+    print(f"Final generalist set size: {len(final_df)} / Target size: {target_total}")
 
     final_path = os.path.join(output_dir, "selected_data.csv")
     final_df.to_csv(final_path, index=False)
-    print(f"[💾] Saved to: {final_path}")
+    print(f"Saved to: {final_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Construct a generalist subset by sampling from tasks using weights")
