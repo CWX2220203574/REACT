@@ -63,12 +63,12 @@ def select_generalist_samples(weight_csv, subset_ratio, intersection_csv, task_r
         task_dir = os.path.join(task_root, task)
         pool_path = os.path.join(task_dir, output_file)
         if not os.path.exists(pool_path):
-            print(f"[✘] Skipped: {pool_path} does not exist")
+            print(f"Skipped: {pool_path} does not exist")
             continue
 
         df = pd.read_csv(pool_path, dtype=str)
         if "score" not in df.columns or "new_id" not in df.columns:
-            print(f"[✘] Skipped: {pool_path} missing new_id or score column")
+            print(f"Skipped: {pool_path} missing new_id or score column")
             continue
 
         df["score"] = df["score"].astype(float)
