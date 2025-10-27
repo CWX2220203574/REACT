@@ -27,12 +27,12 @@ def build_task_pools(root_dir, intersection_csv, top_percent):
         output_path = os.path.join(task_dir, output_file)
 
         if not os.path.isdir(task_dir) or not os.path.exists(top_path):
-            print(f"[✘] Skipped: {top_path} not found")
+            print(f"Skipped: {top_path} not found")
             continue
 
         df = pd.read_csv(top_path, dtype=str)
         if "new_id" not in df.columns:
-            print(f"[✘] Skipped: 'new_id' column missing in {top_path}")
+            print(f"Skipped: 'new_id' column missing in {top_path}")
             continue
 
         original_count = len(df)
@@ -40,7 +40,7 @@ def build_task_pools(root_dir, intersection_csv, top_percent):
         df_filtered = df[~df["new_id"].isin(inter_ids)]
 
         df_filtered.to_csv(output_path, index=False)
-        print(f"[✔] {task}: original {original_count} → after removing intersection: {len(df_filtered)} → saved to {output_path}")
+        print(f"{task}: original {original_count} → after removing intersection: {len(df_filtered)} → saved to {output_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Build task-specific pools by removing global intersection (based on new_id)")
