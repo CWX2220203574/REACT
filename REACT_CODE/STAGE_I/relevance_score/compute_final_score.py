@@ -45,7 +45,7 @@ def compute_and_save_scores(similarity_dir, weight_path, output_dir, save_txt=Fa
         # Save as .pt
         output_pt_path = os.path.join(output_dir, file_name)
         torch.save(weighted_score, output_pt_path)
-        print(f"[✔] Saved: {output_pt_path}")
+        print(f"Saved: {output_pt_path}")
 
         # Optionally save as .txt
         if save_txt:
