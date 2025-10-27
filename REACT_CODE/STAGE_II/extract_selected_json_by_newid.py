@@ -10,7 +10,7 @@ def extract_selected_samples(selected_csv, json_dir, output_dir):
     # 1. Read all target new_ids
     df = pd.read_csv(selected_csv, dtype=str)
     selected_ids = set(df["new_id"])
-    print(f"[✓] Total samples to extract: {len(selected_ids)}")
+    print(f"Total samples to extract: {len(selected_ids)}")
 
     # 2. Traverse all chunk_*.json files and match by new_id
     collected = []
@@ -26,19 +26,19 @@ def extract_selected_samples(selected_csv, json_dir, output_dir):
             if item.get("new_id") in selected_ids:
                 collected.append(item)
 
-    print(f"[✔] Actual number of samples extracted: {len(collected)}")
+    print(f"Actual number of samples extracted: {len(collected)}")
 
     # 3. Save two versions
     with open(os.path.join(output_dir, "selected_data_with_newid.json"), "w") as f1:
         json.dump(collected, f1, indent=2)
-    print(f"[💾] Saved with new_id: selected_data_with_newid.json")
+    print(f"Saved with new_id: selected_data_with_newid.json")
 
     for item in collected:
         item.pop("new_id", None)
 
     with open(os.path.join(output_dir, "selected_data_no_newid.json"), "w") as f2:
         json.dump(collected, f2, indent=2)
-    print(f"[💾] Saved without new_id: selected_data_no_newid.json")
+    print(f"Saved without new_id: selected_data_no_newid.json")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Map selected samples (by new_id) back to original JSON data")
