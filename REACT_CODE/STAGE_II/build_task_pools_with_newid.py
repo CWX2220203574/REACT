@@ -18,7 +18,7 @@ def build_task_pools(root_dir, intersection_csv, top_percent):
     # Load intersection new_id set
     df_inter = pd.read_csv(intersection_csv, dtype=str)
     if "new_id" not in df_inter.columns:
-        raise ValueError("❌ 'new_id' column missing in intersection_keys.csv")
+        raise ValueError("'new_id' column missing in intersection_keys.csv")
     inter_ids = set(df_inter["new_id"])
 
     for task in sorted(os.listdir(root_dir)):
