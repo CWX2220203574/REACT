@@ -22,16 +22,16 @@ def compute_intersection_keys(root_dir, top_percent):
         if os.path.isdir(os.path.join(root_dir, subdir)) and os.path.exists(csv_path):
             df = pd.read_csv(csv_path, dtype=str)
             if "new_id" not in df.columns:
-                print(f"[⚠] Skipped: {csv_path} is missing 'new_id' column")
+                print(f"Skipped: {csv_path} is missing 'new_id' column")
                 continue
             df = df.drop_duplicates(subset="new_id")
             dfs.append(df)
-            print(f"[✔] Loaded: {csv_path} ({len(df)} unique new_id entries)")
+            print(f"Loaded: {csv_path} ({len(df)} unique new_id entries)")
         else:
-            print(f"[✘] Skipped: {csv_path} not found")
+            print(f"Skipped: {csv_path} not found")
 
     if len(dfs) < 2:
-        raise ValueError("❌ At least two tasks are required to compute intersection")
+        raise ValueError("At least two tasks are required to compute intersection")
 
     intersect_ids = set(dfs[0]["new_id"])
     for df in dfs[1:]:
@@ -50,7 +50,7 @@ def save_intersection_ids(intersect_ids, out_path):
     """
     df = pd.DataFrame({"new_id": intersect_ids})
     df.to_csv(out_path, index=False)
-    print(f"[💾] Saved {len(df)} intersected new_ids → {out_path}")
+    print(f"Saved {len(df)} intersected new_ids → {out_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Compute intersection of samples (based on new_id) across tasks")
