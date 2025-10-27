@@ -58,7 +58,7 @@ def main(args):
             with open(txt_path, 'w') as f:
                 f.write(f"Cosine similarity shape: {cosine_sim.shape}\n\n")
                 f.write(str(cosine_sim.cpu()))
-            print(f"[📝] Text format saved to: {txt_path}")
+            print(f"Text format saved to: {txt_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Compute cosine similarity for feature representations.")
