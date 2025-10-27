@@ -211,7 +211,7 @@ def merge_reps_chunks(save_dir, chunk_name, prefix="reps", normalize_variants=(F
             suffix = "normalized" if normalize_flag else "unnormalized"
             output_file = os.path.join(save_dir, f"{chunk_name}_all_{suffix}.pt")
             torch.save(merged_tensor, output_file)
-            print(f"✅ Saved {output_file} | Shape: {merged_tensor.shape}")
+            print(f"Saved {output_file} | Shape: {merged_tensor.shape}")
             
 def build_custom_collate_fn(tokenizer):
     """
