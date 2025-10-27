@@ -14,7 +14,7 @@ def filter_top_percent(input_csv, output_csv, top_percent=0.2):
 
     # Save the result
     df_top.to_csv(output_csv, index=False)
-    print(f"[✔] Saved the top {int(top_percent * 100)}% of the data to: {output_csv}")
+    print(f"Saved the top {int(top_percent * 100)}% of the data to: {output_csv}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Filter the top percentage of data samples based on score")
