@@ -53,7 +53,7 @@ def merge_scores_to_csv(pt_dir, json_dir, output_csv):
 
     df = pd.DataFrame(rows, columns=["new_id", "score"])
     df.to_csv(output_csv, index=False)
-    print(f"[✔] CSV saved to: {output_csv}")
+    print(f"CSV saved to: {output_csv}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Align .pt scores with 'new_id' fields from JSON and output a CSV")
