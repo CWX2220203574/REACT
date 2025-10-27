@@ -8,7 +8,7 @@ start_chunk = 1
 end_chunk = 200
 script_path = "/home/cwx/icons/icons/single_representation.py"
 base_train_file = "/data2/cwx/icons/dataset/download/llava-v1.5-instruct/llava_665k_splits/chunk_{}.json"
-model_path = "/data2/cwx/icons/checkpoints/llava_warm_up_lora/checkpoint-500"
+model_path = "/data2/cwx/icons/checkpoints/llava_warm_up_lora/"
 image_folder = "/data2/cwx/icons/dataset/download/llava-v1.5-instruct"
 output_path = "/data2/cwx/icons/output_mean"
 min_free_mem_GB = 17
@@ -44,7 +44,7 @@ def launch_task(gpu_id, chunk_id):
         f"> {log_file} 2>&1"
     ]
     proc = subprocess.Popen(command)
-    print(f"✔️ Launched chunk_{chunk_id} on GPU {gpu_id}")
+    print(f"Launched chunk_{chunk_id} on GPU {gpu_id}")
     running_procs[gpu_id] = (chunk_id, proc)
 
 # Main scheduling loop
@@ -54,7 +54,7 @@ while next_chunk <= end_chunk or running_procs:
     completed_gpus = []
     for gpu_id, (chunk_id, proc) in running_procs.items():
         if proc.poll() is not None:  # Subprocess has completed
-            print(f"✅ Finished chunk_{chunk_id} on GPU {gpu_id}")
+            print(f"Finished chunk_{chunk_id} on GPU {gpu_id}")
             completed_gpus.append(gpu_id)
 
     for gpu_id in completed_gpus:
@@ -70,4 +70,4 @@ while next_chunk <= end_chunk or running_procs:
         launch_task(gpu_id, next_chunk)
         next_chunk += 1
 
-    time.sleep(10)  # Check GPU status every 10 seconds
+    time.sleep(10) 
